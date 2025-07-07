@@ -46,27 +46,39 @@
                 <p>Result:</p>
             </div>
             <div id="Update" class="card">
-                <h2>Update Student</h2>
-                <form action="update" method="post" class="form-grid">
-                    <label for="id">Student ID</label>
-                    <input type="text" id="id" name="id" required>
+    <h2>Update Student</h2>
 
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+    <!-- Search Form -->
+    <form action="/searchi" method="get" class="form-grid">
+    	<label for="id">Student ID</label>
+    	<input type="text" id="id" name="id" required>
 
-                    <label for="age">Age</label>
-                    <input type="number" id="age" name="age" required>
+    	<div class="full-width-right">
+        	<button type="submit">Search</button>
+    	</div>
+	</form>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+    <!-- Update Form -->
+    <form action="/update" method="post" class="form-grid">
+        <input type="hidden" id="id" name="id" value="${searchedStudent.id}">
 
-                    <label for="course">Course</label>
-                    <input type="text" id="course" name="course" required>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="${searchedStudent.name}" required>
 
-                    <button type="submit">Update</button>
-                </form>
-                <p>Result:</p>
-            </div>
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" value="${searchedStudent.age}" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="${searchedStudent.email}" required>
+
+        <label for="course">Course</label>
+        <input type="text" id="course" name="course" value="${searchedStudent.course}" required>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <p>Result: ${message}</p>
+</div>
 
 
             <div id="Delete" class="card">
@@ -94,6 +106,13 @@
 
         </section>
     </main>
-
+<script>
+    window.onload = function () {
+        const scrollToUpdate = "${scrollToUpdate}";
+        if (scrollToUpdate === "true") {
+            location.hash = "#Update";
+        }
+    };
+</script>
 </body>
 </html>

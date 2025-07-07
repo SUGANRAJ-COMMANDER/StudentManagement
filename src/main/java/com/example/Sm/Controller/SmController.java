@@ -80,6 +80,18 @@ public class SmController {
         return "result";
     }
 	
+	@GetMapping("/searchi")
+	public String searchStudents(@RequestParam("id") int id, ModelMap model) {
+	    Optional<Student> student = repo.findById(id);
+	    if (student.isPresent()) {
+	        model.addAttribute("searchedStudent", student.get());
+	        model.addAttribute("message", "Student found!");
+	        model.addAttribute("scrollToUpdate", true); // Add this flag
+	    } else {
+	        model.addAttribute("message", "Student not found!");
+	    }
+	    return "index"; // Always return to index.jsp
+	}
 	  @GetMapping("/search")
 	    public String searchStudent(@RequestParam("id") int id, ModelMap model) {
 	        Optional<Student> student = repo.findById(id);
